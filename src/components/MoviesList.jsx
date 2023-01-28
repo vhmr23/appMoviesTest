@@ -1,10 +1,26 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { FlatList } from 'react-native'
+import {  API_KEY, BASE_URL } from '../utils/api'
+import axios from 'axios'
+import MovieItem from './MovieItem'
 
 export default function MobiesList() {
+  
+  const [listMovies, setListMovies] = useState([])
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}discover/movie?api_key=${API_KEY}&language=es-ES&sort_by=original_title.asc&include_adult=false&include_video=false&page=1`)
+    .then((response) => {
+      setListMovies(response.data.results)
+  });
+  }, [])
+  console.log(listMovies)
   return (
-    <View>
-      <Text>MobiesList</Text>
-    </View>
+    <FlatList 
+      data={listMovies}
+      renderItem={({item}) => (
+        <MovieItem item={item} />
+      )}
+    />
   )
 }
