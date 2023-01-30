@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
     big: {
         fontSize: 20,
     },
+    middel:{
+        fontSize: 15,
+    },
     small: {
         fontSize: 10,
     },

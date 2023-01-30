@@ -22,17 +22,28 @@ export default function MovieItem({ item }) {
   return (
     <View key={item.id} style={styles.container}>
         <View style={{ paddingRight: 10}}>
-          <Image
+          { item.poster_path === null ?
+            <Image
             style={styles.logo}          
-            source={{uri: `${IMAGE_URL}${item.poster_path ? item.poster_path : item.backdrop_path}`}}
-          />
+            source={ require('../../assets/image-defualt.png')}
+            />
+            :
+            <Image
+            style={styles.logo}          
+            source={{
+              uri: `${IMAGE_URL}${item.poster_path }`}}
+            />
+          }
         </View>
         <View style={{ flex: 1}}>
           <TextStyles title>
-          {item.title}
+            Titulo: {item.title}
+          </TextStyles>
+          <TextStyles middle strong>
+            Votos: {item.vote_average}
           </TextStyles>
           <TextStyles small>
-          {item.release_date}
+            Fecha de estreno: {item.release_date}
           </TextStyles>
         </View>
     </View>
