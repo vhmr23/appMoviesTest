@@ -45,7 +45,7 @@ export default function RatingStart({ rating, votes }) {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView>
       <View style={styles.container}>
         <View style={styles.stars}>
           {starRatingOptions.map((option) => (
@@ -76,7 +76,6 @@ export default function RatingStart({ rating, votes }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,

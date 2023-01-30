@@ -6,7 +6,7 @@ import MoviesList from '../components/MoviesList'
 export default function Index({ navigation }) {
   return (
     <View style={{ marginTop: Constants.statusBarHeight, flexGrow: 1}}>
-      <Text>Hola victor</Text>
+      <Text>WELCOME DE APP MOVIES: </Text>
       <MoviesList />
     </View>
   )

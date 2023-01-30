@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, ImageBackground } from 'react-native'
+import { View, Text, StyleSheet, ImageBackground, ScrollView,} from 'react-native'
 import {  API_KEY, BASE_URL, IMAGE_URL_PORTAL } from '../utils/api'
 import axios from 'axios'
 import RatingStart from '../components/RatingStart'
@@ -9,6 +9,7 @@ import MovieSimilar from '../components/MovieSimilar'
 const MovieDetail = ({ route }) => {
   const { id } = route.params
   const [movie, setMovie] = useState({})
+  const [genero, setGenero] = useState([])
 
   useEffect(() => {
     axios.get(`${BASE_URL}movie/${id}?api_key=${API_KEY}&language=en-US&append_to_response=videos,images`)
@@ -17,9 +18,10 @@ const MovieDetail = ({ route }) => {
     });
   }, [id])
   
+  if(movie.genres === undefined || movie.genres === null){return null}
 
   return (
-    <View>
+    <ScrollView>
       <View style={styles.containerRow}>
         <ImageBackground
           style={styles.postal}          
@@ -40,7 +42,11 @@ const MovieDetail = ({ route }) => {
         <View style={{ flexDirection:'column'}}>
           <View style={{ paddingTop: 30}}>
             <TextStyles middle strong>Fecha: {movie.release_date}</TextStyles>
-            <TextStyles middle strong>Genero: </TextStyles>
+            <TextStyles middle strong>
+              Genero: {movie.genres.map(genre => (
+                <TextStyles middle>{genre.name +' '}</TextStyles>
+              ))}
+            </TextStyles>
           </View>
         </View>
       </View>
@@ -48,10 +54,10 @@ const MovieDetail = ({ route }) => {
         <TextStyles big strong>Descripción: </TextStyles>
         <TextStyles middle>{movie.overview}</TextStyles>
       </View>
-      <View>
+      <View style={{ paddingTop: 20}}>
         <MovieSimilar movieId={id}/>
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
@@ -63,7 +69,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     backgroundColor: '#000000c0',
-    flex: 1
   },
   postal: {
     width: 400,
