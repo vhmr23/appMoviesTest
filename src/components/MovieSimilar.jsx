@@ -29,18 +29,20 @@ const MovieSimilar = ({ movieId }) => {
               onPress={() => navigation.navigate('DetailMovies', {id : item.id} )}
             >
               <View key={item.id} >
-                { item.poster_path === null ?
-                  <Image
-                  style={styles.logo}          
-                  source={ require('../../assets/image-defualt.png')}
-                  />
-                  :
-                  <Image
-                  style={styles.logo}          
-                  source={{
-                    uri: `${IMAGE_URL}${item.poster_path }`}}
-                  />
-                }
+                <View style={styles.ImageContainer}>
+                  { item.poster_path === null ?
+                    <Image
+                    style={styles.logo}          
+                    source={ require('../../assets/image-defualt.png')}
+                    />
+                    :
+                    <Image
+                    style={styles.logo}          
+                    source={{
+                      uri: `${IMAGE_URL}${item.poster_path }`}}
+                    />
+                  }
+                </View>
                 <View>
                   <Text middle>{item.title}</Text>
                 </View>
@@ -61,6 +63,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 10,
     paddingTop: 10,
+  },
+  ImageContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   logo: {
     width: 100,
